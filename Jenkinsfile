@@ -8,16 +8,24 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Build Docker Image') {
             steps {
-                echo 'No external dependencies to install.'
+                echo 'Building Docker image...'
+                bat 'docker build -t python-calculator .'
             }
         }
 
-        stage('Run Tests') {
+        stage('Run Docker Container') {
             steps {
-                echo 'Running unit tests...'
-                bat 'python -m unittest discover'
+                echo 'Running Docker container...'
+                bat 'docker run --rm python-calculator'
+            }
+        }
+
+        stage('Run Tests Inside Docker') {
+            steps {
+                echo 'Running tests inside container...'
+                bat 'docker run --rm python-calculator python -m unittest discover'
             }
         }
     }
