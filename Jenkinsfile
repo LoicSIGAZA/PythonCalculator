@@ -10,8 +10,7 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                echo 'Installing dependencies...'
-                bat 'pip install -r requirements.txt'
+                echo 'No external dependencies to install.'
             }
         }
 
